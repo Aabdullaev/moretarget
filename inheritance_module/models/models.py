@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-
+import logging
 
 class inheritance_module(models.Model):
     # _name = 'inheritance_module.inheritance_module'
@@ -13,4 +13,8 @@ class inheritance_module(models.Model):
 
     @api.depends('value')
     def _value_inheritance(self):
+        logging.info(self.test())
         self.inhertance_value = self.value * 2
+
+    def test(self):
+        return "Test Inheritance"
