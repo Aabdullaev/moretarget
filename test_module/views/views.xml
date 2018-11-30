@@ -1,67 +1,152 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-    
-    <record model="ir.ui.view" id="test_module.list">
-      <field name="name">test_module list</field>
-      <field name="model">test_module.test_module</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-   
+        <!-- explicit list view definition -->
 
-    <!-- actions opening views on models -->
-    
+    <record model="ir.ui.view" id="test_module_list">
+        <field name="name">test_module list</field>
+        <field name="model">test_module.test_module</field>
+        <field name="view_type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="value"/>
+                <field name="value2"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="test_module_form">
+        <field name="name">test_module form</field>
+        <field name="model">test_module.test_module</field>
+        <field name="view_type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="value"/>
+                </group>
+                <notebook>
+                    <page string="Description">
+                        <field name="description"/>
+                    </page>
+                    <page string="Responsible">
+                        <field name="responsible_id"/>
+                    </page>
+                     <page string="Sessions">
+                        <field name="session_ids">
+                            <tree string="Registered sessions">
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+
+        <!-- actions opening views on models -->
+
     <record model="ir.actions.act_window" id="test_module.action_window">
-      <field name="name">test_module window</field>
-      <field name="res_model">test_module.test_module</field>
-      <field name="view_mode">tree,form</field>
+        <field name="name">test_module window</field>
+        <field name="res_model">test_module.test_module</field>
+        <field name="view_mode">tree,form</field>
     </record>
-   
 
-    <!-- server action to the one above -->
-    
-    <!-- <record model="ir.actions.server" id="test_module.action_server">
-      <field name="name">test_module server</field>
-      <field name="model_id" ref="model_test_module_test_module"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-    -->
 
-    <!-- Top menu item -->
-    
+        <!-- server action to the one above -->
+
+        <!-- <record model="ir.actions.server" id="test_module.action_server">
+          <field name="name">test_module server</field>
+          <field name="model_id" ref="model_test_module_test_module"/>
+          <field name="state">code</field>
+          <field name="code">
+            action = {
+              "type": "ir.actions.act_window",
+              "view_mode": "tree,form",
+              "res_model": self._name,
+            }
+          </field>
+        </record>
+        -->
+
+        <!-- Top menu item -->
+
     <menuitem name="test_module" id="test_module.menu_root"/>
-   
-    <!-- menu categories -->
-    
+
+        <!-- menu categories -->
+
     <menuitem name="Menu 1" id="test_module.menu_1" parent="test_module.menu_root"/>
     <menuitem name="Menu 2" id="test_module.menu_2" parent="test_module.menu_root"/>
-   
-    <!-- actions -->
-    
+
+        <!-- actions -->
+
     <menuitem name="List" id="test_module.menu_1_list" parent="test_module.menu_1"
               action="test_module.action_window"/>
-    <!-- <menuitem name="Server to list" id="test_module" parent="test_module.menu_2"
-              action="test_module.action_server"/> -->
-   
-  </data>
+        <!-- <menuitem name="Server to list" id="test_module" parent="test_module.menu_2"
+                  action="test_module.action_server"/> -->
+    <!--View for session-->
+     <record model="ir.ui.view" id="session_form_view">
+        <field name="name">session.form</field>
+        <field name="model">test_module.session</field>
+        <field name="arch" type="xml">
+            <form string="Session Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                        <field name="seats"/>
+                        <notebook>
+                             <page string="Course">
+                                <label for="course_ids"/>
+                                 <field name="course_ids"/>
+                            </page>
+                        </notebook>
+                        <!--<field name="course_id"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="session_list_action">
+        <field name="name">Sessions</field>
+        <field name="res_model">test_module.session</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--View for course-->
+     <record model="ir.ui.view" id="course_form">
+        <field name="name">course form</field>
+        <field name="model">test_module.course</field>
+        <field name="arch" type="xml">
+            <form string="Course Form">
+                <sheet>
+                    <group>
+                        <field name="description"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="course_tree">
+        <field name="name">course tree</field>
+        <field name="model">test_module.course</field>
+        <field name="arch" type="xml">
+            <tree string="Course Form">
+                <field name="description"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="course_list_action">
+        <field name="name">Course</field>
+        <field name="res_model">test_module.course</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 </odoo>
