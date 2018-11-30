@@ -37,3 +37,6 @@ class test_module(models.Model):
     @api.depends('value')
     def _value_pc(self):
         self.value2 = float(self.value) / 100
+
+    def test(self):
+        return "test"

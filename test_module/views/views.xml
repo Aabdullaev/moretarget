@@ -23,12 +23,13 @@
                 <group>
                     <field name="name"/>
                     <field name="value"/>
+                    <field name="value2"/>
                 </group>
                 <notebook>
                     <page string="Description">
                         <field name="description"/>
                     </page>
-                    <page string="Responsible">
+                    <page string="Responsible" name="responsible_id_layout">
                         <field name="responsible_id"/>
                     </page>
                      <page string="Sessions">
