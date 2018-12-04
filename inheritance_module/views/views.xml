@@ -23,6 +23,12 @@
             <xpath expr="//field[@name='value']" position="after">
                 <field name="inhertance_value" string="Inhertance value"></field>
             </xpath>
+            <xpath expr="//notebook[@name='notebook_layout']" position="inside">
+                 <page string="Product">
+                    <label for="product_ids"/>
+                     <field name="product_ids"/>
+                </page>
+            </xpath>
         </field>
     </record>
       <!-- actions opening views on models -->

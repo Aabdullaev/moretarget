@@ -33,6 +33,7 @@ class test_module(models.Model):
     description = fields.Text()
     responsible_id = fields.Many2one('res.users', ondelete='set null', string="Responsible", index=True)
     session_ids = fields.One2many('test_module.session', 'test_module_id', string="Sessions")
+    state = fields.Char()
 
     @api.depends('value')
     def _value_pc(self):

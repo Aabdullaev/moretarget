@@ -6,11 +6,22 @@
         <field name="model">test_module.test_module</field>
         <field name="view_type">tree</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-warning="value&gt;120">
                 <field name="name"/>
                 <field name="value"/>
-                <field name="value2"/>
+                <field name="state"/>
             </tree>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="test_module_calendar">
+        <field name="name">test_module calendar</field>
+        <field name="model">test_module.test_module</field>
+        <field name="view_type">calendar</field>
+        <field name="arch" type="xml">
+           <calendar string="Name Calendars" date_start="create_date"  date_stop="__last_update" color="id">
+                 <field name="name" string="Name test calendars"></field>
+            </calendar>
         </field>
     </record>
 
@@ -24,8 +35,9 @@
                     <field name="name"/>
                     <field name="value"/>
                     <field name="value2"/>
+                    <field name="state"/>
                 </group>
-                <notebook>
+                <notebook name="notebook_layout">
                     <page string="Description">
                         <field name="description"/>
                     </page>
@@ -50,7 +62,7 @@
     <record model="ir.actions.act_window" id="test_module.action_window">
         <field name="name">test_module window</field>
         <field name="res_model">test_module.test_module</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">calendar</field>
     </record>
 
 
